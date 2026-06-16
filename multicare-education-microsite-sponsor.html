@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MultiCare Learning — Your Savings Journey</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0D2B45;
+  --navy-2:#143A5C;
+  --teal:#11848C;
+  --teal-dark:#0C6168;
+  --teal-soft:#E3F2F3;
+  --gold:#D9A526;
+  --gold-soft:#FBF3DE;
+  --paper:#F6F8F9;
+  --card:#FFFFFF;
+  --ink:#22303C;
+  --ink-soft:#5A6B78;
+  --line:#DDE6EA;
+  --radius:14px;
+  --shadow:0 10px 30px rgba(13,43,69,.08);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+body{
+  font-family:'Public Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.6;
+  font-size:16px;
+}
+h1,h2,h3,.display{font-family:'Fraunces',Georgia,serif}
+a{color:var(--teal)}
+button{font-family:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:4px}
+
+/* ---------- Top bar ---------- */
+.topbar{
+  position:sticky;top:0;z-index:50;
+  background:var(--navy);
+  color:#fff;
+  border-bottom:4px solid var(--teal);
+}
+.topbar-inner{
+  max-width:1120px;margin:0 auto;
+  display:flex;align-items:center;gap:18px;
+  padding:14px 24px;
+}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.3px}
+.logo-mark{
+  width:34px;height:34px;border-radius:9px;
+  background:linear-gradient(135deg,var(--teal) 0% 55%,var(--gold) 55% 100%);
+  display:grid;place-items:center;
+  font-family:'Fraunces',serif;font-weight:700;font-size:18px;color:#fff;
+}
+.logo small{display:block;font-weight:500;font-size:11px;opacity:.75;letter-spacing:.8px;text-transform:uppercase}
+.audience-toggle{
+  margin-left:auto;display:flex;background:rgba(255,255,255,.12);
+  border-radius:999px;padding:4px;gap:2px;
+}
+.audience-toggle button{
+  border:none;background:transparent;color:#fff;
+  padding:7px 16px;border-radius:999px;font-size:14px;font-weight:600;
+  transition:background .2s,color .2s;
+}
+.audience-toggle button[aria-pressed="true"]{background:#fff;color:var(--navy)}
+.journey-meter{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;white-space:nowrap}
+.journey-meter .track{width:110px;height:8px;border-radius:99px;background:rgba(255,255,255,.18);overflow:hidden}
+.journey-meter .fill{height:100%;width:0%;background:linear-gradient(90deg,var(--teal),var(--gold));border-radius:99px;transition:width .5s ease}
+
+/* ---------- Hero ---------- */
+.hero{
+  background:
+    radial-gradient(1200px 500px at 85% -10%,rgba(17,132,140,.35),transparent 60%),
+    radial-gradient(900px 420px at -10% 110%,rgba(217,165,38,.22),transparent 55%),
+    var(--navy);
+  color:#fff;
+  padding:72px 24px 88px;
+  position:relative;overflow:hidden;
+}
+.hero-inner{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:18px;
+}
+.eyebrow::before{content:"";width:26px;height:2px;background:var(--gold)}
+.hero h1{font-size:clamp(34px,4.6vw,56px);line-height:1.08;font-weight:600;margin-bottom:18px}
+.hero h1 em{font-style:italic;color:#7BD1D6}
+.hero p.lede{font-size:18px;color:#C7D6E2;max-width:52ch;margin-bottom:30px}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+.btn{
+  border:none;border-radius:10px;padding:14px 24px;
+  font-size:15px;font-weight:700;transition:transform .15s,box-shadow .15s,background .2s;
+  display:inline-flex;align-items:center;gap:9px;text-decoration:none;
+}
+.btn-primary{background:var(--teal);color:#fff;box-shadow:0 6px 20px rgba(17,132,140,.4)}
+.btn-primary:hover{background:var(--teal-dark);transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.35)}
+.btn-ghost:hover{border-color:#fff}
+.hero-stats{display:flex;gap:28px;margin-top:38px;flex-wrap:wrap}
+.hero-stat{font-size:13.5px;color:#9FB4C4;display:flex;align-items:center;gap:8px}
+.hero-stat b{color:#fff;font-size:15px}
+.hero-stat .dot{width:7px;height:7px;border-radius:99px;background:var(--gold)}
+
+/* Hero journey card */
+.hero-card{
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.14);
+  backdrop-filter:blur(6px);
+  border-radius:var(--radius);
+  padding:26px;
+}
+.hero-card h3{font-size:17px;margin-bottom:16px;color:#fff;font-weight:600}
+.mini-journey{list-style:none;display:flex;flex-direction:column;gap:0}
+.mini-journey li{
+  display:flex;gap:14px;align-items:flex-start;position:relative;
+  padding-bottom:18px;font-size:14px;color:#C7D6E2;
+}
+.mini-journey li::before{
+  content:"";position:absolute;left:10px;top:24px;bottom:0;width:2px;
+  background:rgba(255,255,255,.18);
+}
+.mini-journey li:last-child::before{display:none}
+.mini-journey .node{
+  flex:none;width:22px;height:22px;border-radius:99px;margin-top:1px;
+  background:var(--teal);display:grid;place-items:center;
+  font-size:11px;font-weight:700;color:#fff;position:relative;z-index:1;
+}
+.mini-journey li:nth-child(3) .node{background:var(--gold);color:var(--navy)}
+.mini-journey b{color:#fff;display:block;font-weight:600}
+
+/* ---------- Sections ---------- */
+.section{max-width:1120px;margin:0 auto;padding:72px 24px}
+.section-head{max-width:64ch;margin-bottom:44px}
+.section-head .eyebrow{color:var(--teal)}
+.section-head .eyebrow::before{background:var(--teal)}
+.section-head h2{font-size:clamp(26px,3.2vw,38px);font-weight:600;color:var(--navy);margin-bottom:12px;line-height:1.15}
+.section-head p{color:var(--ink-soft);font-size:16.5px}
+
+/* ---------- Journey path / capsules ---------- */
+.journey{position:relative}
+.journey::before{
+  content:"";position:absolute;left:27px;top:10px;bottom:10px;width:3px;
+  background:var(--line);border-radius:99px;
+}
+.journey .path-fill{
+  position:absolute;left:27px;top:10px;width:3px;height:0;
+  background:linear-gradient(180deg,var(--teal),var(--gold));
+  border-radius:99px;transition:height .6s ease;
+}
+.capsule{
+  position:relative;display:grid;grid-template-columns:56px 1fr;gap:18px;
+  margin-bottom:26px;
+}
+.capsule .node{
+  width:56px;height:56px;border-radius:99px;background:var(--card);
+  border:3px solid var(--line);display:grid;place-items:center;
+  font-family:'Fraunces',serif;font-weight:700;font-size:19px;color:var(--navy);
+  position:relative;z-index:1;transition:border-color .3s,background .3s;
+}
+.capsule.done .node{background:var(--teal);border-color:var(--teal);color:#fff}
+.capsule.milestone .node{border-color:var(--gold)}
+.capsule.milestone.done .node{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+.capsule-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:22px 24px;box-shadow:0 2px 10px rgba(13,43,69,.04);
+  transition:box-shadow .2s,transform .2s,border-color .2s;
+  cursor:pointer;text-align:left;width:100%;
+}
+.capsule-card:hover{box-shadow:var(--shadow);transform:translateY(-2px);border-color:var(--teal)}
+.capsule-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.capsule-card h3{font-size:19px;font-weight:600;color:var(--navy)}
+.badge{
+  font-size:11.5px;font-weight:700;letter-spacing:.4px;
+  padding:4px 10px;border-radius:99px;white-space:nowrap;
+}
+.badge.time{background:var(--teal-soft);color:var(--teal-dark)}
+.badge.gb{background:var(--gold-soft);color:#8A6A14}
+.cat-badge{font-size:11px!important}
+.cat-core{background:#E3F2F3;color:#0C6168}
+.cat-invest{background:#E6F1FB;color:#185FA5}
+.cat-life{background:#EAF3DE;color:#3B6D11}
+.cat-sponsor{background:#EEEDFE;color:#3C3489}
+.badge.done-badge{background:var(--teal);color:#fff;display:none}
+.capsule.done .badge.done-badge{display:inline-block}
+.capsule-card p{color:var(--ink-soft);font-size:14.5px;max-width:70ch}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.chip{font-size:12.5px;font-weight:600;color:var(--navy-2);background:var(--paper);border:1px solid var(--line);padding:4px 11px;border-radius:99px}
+
+/* ---------- Total rewards strip ---------- */
+.rewards{
+  background:linear-gradient(120deg,var(--navy) 0%,var(--navy-2) 60%,#1C4E6B 100%);
+  color:#fff;border-radius:20px;
+  max-width:1120px;margin:0 auto;padding:54px 48px;
+  display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center;
+  position:relative;overflow:hidden;
+}
+.rewards::after{
+  content:"";position:absolute;right:-80px;top:-80px;width:300px;height:300px;
+  border-radius:99px;background:radial-gradient(circle,rgba(217,165,38,.35),transparent 70%);
+}
+.rewards h2{font-size:clamp(24px,3vw,34px);font-weight:600;margin-bottom:12px}
+.rewards p{color:#C7D6E2;max-width:50ch}
+.rewards .btn-gold{background:var(--gold);color:var(--navy);margin-top:24px}
+.rewards .btn-gold:hover{background:#E7B73B;transform:translateY(-1px)}
+.rewards-list{list-style:none;display:flex;flex-direction:column;gap:12px;position:relative;z-index:1}
+.rewards-list li{
+  display:flex;justify-content:space-between;gap:16px;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);
+  padding:13px 18px;border-radius:10px;font-size:14.5px;
+}
+.rewards-list b{color:var(--gold)}
+
+/* ---------- Sponsor view ---------- */
+.sponsor-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.panel{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:28px;box-shadow:0 2px 10px rgba(13,43,69,.04);
+  border-top:4px solid var(--teal);
+}
+.panel.gold{border-top-color:var(--gold)}
+.panel h3{font-size:19px;color:var(--navy);font-weight:600;margin-bottom:8px}
+.panel p{color:var(--ink-soft);font-size:14.5px;margin-bottom:16px}
+.panel ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.panel ul li{display:flex;gap:10px;font-size:14.5px;align-items:flex-start}
+.panel ul li::before{
+  content:"";flex:none;width:8px;height:8px;border-radius:99px;
+  background:var(--teal);margin-top:7px;
+}
+.panel.gold ul li::before{background:var(--gold)}
+.bars{display:flex;flex-direction:column;gap:14px;margin-top:6px}
+.bar-row{display:grid;grid-template-columns:150px 1fr 44px;gap:12px;align-items:center;font-size:13.5px}
+.bar-row .label{color:var(--ink);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar-track{height:10px;background:var(--paper);border:1px solid var(--line);border-radius:99px;overflow:hidden}
+.bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--teal),#3AA6AD)}
+.bar-row .val{font-weight:700;color:var(--teal-dark);text-align:right}
+
+/* ---------- Modal ---------- */
+.modal-backdrop{
+  position:fixed;inset:0;background:rgba(13,43,69,.55);
+  display:none;align-items:center;justify-content:center;z-index:100;padding:20px;
+}
+.modal-backdrop.open{display:flex}
+.modal{
+  background:#fff;border-radius:18px;max-width:680px;width:100%;
+  max-height:90vh;overflow:auto;box-shadow:0 30px 80px rgba(13,43,69,.35);
+}
+.modal-video{
+  aspect-ratio:16/9;background:linear-gradient(135deg,var(--navy),var(--navy-2));
+  display:grid;place-items:center;position:relative;border-radius:18px 18px 0 0;
+}
+.play-btn{
+  width:74px;height:74px;border-radius:99px;border:none;
+  background:rgba(255,255,255,.95);display:grid;place-items:center;
+  box-shadow:0 10px 30px rgba(0,0,0,.3);transition:transform .15s;
+}
+.play-btn:hover{transform:scale(1.06)}
+.play-btn::after{
+  content:"";display:block;width:0;height:0;margin-left:5px;
+  border-left:22px solid var(--teal);border-top:14px solid transparent;border-bottom:14px solid transparent;
+}
+.modal-video .vid-note{
+  position:absolute;bottom:14px;left:18px;color:#C7D6E2;font-size:12.5px;letter-spacing:.4px;
+}
+.modal-body{padding:28px 30px 30px}
+.modal-body .capsule-top{margin-bottom:10px}
+.modal-body h3{font-size:23px;color:var(--navy);font-weight:600}
+.modal-body p{color:var(--ink-soft);font-size:15px;margin-top:8px}
+.modal-actions{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;align-items:center}
+.btn-complete{background:var(--teal);color:#fff}
+.btn-complete:hover{background:var(--teal-dark)}
+.btn-complete.is-done{background:var(--gold);color:var(--navy)}
+.modal-nav{margin-left:auto;display:flex;gap:8px}
+.btn-nav{background:var(--paper);border:1px solid var(--line);color:var(--navy);padding:12px 18px}
+.btn-nav:hover{border-color:var(--teal)}
+.modal-close{
+  position:sticky;top:0;margin-left:auto;display:block;
+  background:rgba(255,255,255,.9);border:none;width:40px;height:40px;border-radius:99px;
+  font-size:20px;color:var(--navy);float:right;margin:12px 12px 0 0;z-index:2;
+}
+
+/* ---------- Category tabs ---------- */
+.cat-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.cat-tab{
+  background:var(--card);border:1.5px solid var(--line);
+  border-radius:99px;padding:8px 18px;
+  font-size:14px;font-weight:500;color:var(--ink-soft);
+  cursor:pointer;transition:all .15s;
+}
+.cat-tab:hover{border-color:var(--teal);color:var(--teal)}
+.cat-tab.active{background:var(--navy);border-color:var(--navy);color:#fff}
+.cat-desc{
+  font-size:14px;color:var(--ink-soft);
+  background:var(--teal-soft);border-left:3px solid var(--teal);
+  border-radius:0 8px 8px 0;padding:10px 14px;
+  margin-bottom:20px;display:none;line-height:1.6;
+}
+.cat-desc.show{display:block}
+
+/* ---------- Capsule summary ---------- */
+.capsule-summary{margin-top:20px;border-top:1.5px solid var(--line);padding-top:18px;display:none}
+.capsule-summary h5{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--teal);margin-bottom:12px}
+.capsule-summary ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.capsule-summary ul li{display:flex;gap:10px;font-size:14px;color:var(--ink-soft);line-height:1.55;align-items:flex-start}
+.capsule-summary ul li::before{content:"";flex:none;width:7px;height:7px;border-radius:99px;background:var(--teal);margin-top:6px}
+
+/* ---------- Quiz ---------- */
+.quiz-section{margin-top:24px;border-top:2px solid var(--line);padding-top:22px}
+.quiz-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.quiz-header h4{font-size:16px;font-weight:700;color:var(--navy)}
+.quiz-progress{font-size:12.5px;font-weight:600;color:var(--ink-soft)}
+.quiz-question{font-size:15px;font-weight:600;color:var(--navy);margin-bottom:14px;line-height:1.45}
+.quiz-options{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.quiz-option{
+  background:var(--paper);border:1.5px solid var(--line);border-radius:10px;
+  padding:13px 16px;font-size:14.5px;color:var(--ink);
+  cursor:pointer;text-align:left;transition:border-color .2s,background .2s;
+  display:flex;align-items:center;gap:12px;
+}
+.quiz-option:hover{border-color:var(--teal);background:var(--teal-soft)}
+.quiz-option.correct{border-color:#2E7D32;background:#E8F5E9;color:#1B5E20;font-weight:600}
+.quiz-option.wrong{border-color:#C62828;background:#FFEBEE;color:#B71C1C}
+.quiz-option:disabled{cursor:default}
+.quiz-option .opt-icon{width:22px;height:22px;border-radius:99px;border:2px solid var(--line);flex:none;display:grid;place-items:center;font-size:12px;font-weight:700;transition:all .2s}
+.quiz-option.correct .opt-icon{background:#2E7D32;border-color:#2E7D32;color:#fff}
+.quiz-option.wrong .opt-icon{background:#C62828;border-color:#C62828;color:#fff}
+.quiz-feedback{
+  border-radius:10px;padding:12px 16px;font-size:14px;line-height:1.5;
+  margin-bottom:16px;display:none;
+}
+.quiz-feedback.show{display:block}
+.quiz-feedback.correct{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.quiz-feedback.wrong{background:#FFF8E1;color:#795548;border:1px solid #FFE082}
+.quiz-next{background:var(--teal);color:#fff;border:none;border-radius:10px;padding:12px 22px;font-size:14px;font-weight:700;cursor:pointer;display:none;transition:background .2s}
+.quiz-next:hover{background:var(--teal-dark)}
+.quiz-next.show{display:inline-flex;align-items:center;gap:8px}
+.quiz-complete{
+  background:linear-gradient(120deg,var(--navy),var(--navy-2));
+  color:#fff;border-radius:14px;padding:24px;text-align:center;
+  display:none;
+}
+.quiz-complete.show{display:block}
+.quiz-complete .complete-icon{font-size:36px;margin-bottom:10px}
+.quiz-complete h4{font-size:19px;font-weight:700;margin-bottom:8px}
+.quiz-complete p{font-size:14px;color:#C7D6E2;margin-bottom:16px}
+.quiz-complete .btn-gold{background:var(--gold);color:var(--navy);border:none;border-radius:10px;padding:12px 22px;font-size:14px;font-weight:700;cursor:pointer}
+
+/* ---------- Footer ---------- */
+footer{background:var(--navy);color:#9FB4C4;margin-top:80px}
+.footer-inner{max-width:1120px;margin:0 auto;padding:48px 24px;display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;font-size:14px}
+footer b{color:#fff}
+footer .logo-mark{width:28px;height:28px;font-size:14px}
+
+.view{display:none}
+.view.active{display:block}
+.skip-link{
+  position:absolute;left:-9999px;top:0;background:var(--gold);color:var(--navy);
+  padding:10px 18px;font-weight:700;border-radius:0 0 10px 0;z-index:200;
+}
+.skip-link:focus{left:0}
+
+/* ---------- Responsive ---------- */
+@media (max-width:900px){
+  .hero-inner{grid-template-columns:1fr}
+  .hero-card{display:none}
+  .rewards{grid-template-columns:1fr;padding:40px 28px;margin:0 16px}
+  .sponsor-grid{grid-template-columns:1fr}
+  .journey-meter span.lbl{display:none}
+}
+@media (max-width:600px){
+  .topbar-inner{padding:12px 16px;gap:10px}
+  .logo small{display:none}
+  .section{padding:52px 18px}
+  .hero{padding:52px 18px 60px}
+  .capsule{grid-template-columns:44px 1fr;gap:12px}
+  .capsule .node{width:44px;height:44px;font-size:16px}
+  .journey::before,.journey .path-fill{left:21px}
+  .bar-row{grid-template-columns:110px 1fr 40px}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#capsules">Skip to capsules</a>
+
+<!-- ======= TOP BAR ======= -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="logo">
+      <div class="logo-mark">M</div>
+      <div>MultiCare Learning<small>Group Retirement &amp; Benefits</small></div>
+    </div>
+    <span id="memberGreeting" style="font-size:13px;color:rgba(255,255,255,0.75);white-space:nowrap;display:none;margin-left:8px"></span>
+    <div class="audience-toggle" role="group" aria-label="Choose your view">
+      <button id="btnMembers" aria-pressed="true" onclick="setView('members')">Plan members</button>
+      <button id="btnSponsors" aria-pressed="false" onclick="requestSponsorAccess()">Plan sponsors 🔒</button>
+    </div>
+    <div class="journey-meter" aria-live="polite">
+      <span class="lbl">Your journey</span>
+      <div class="track"><div class="fill" id="meterFill"></div></div>
+      <span id="meterText">0 / 18</span>
+    </div>
+    <button onclick="resetProgress()" title="Reset my progress" id="resetBtn" style="background:none;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.55);padding:5px 10px;border-radius:6px;font-size:12px;cursor:pointer;display:none;white-space:nowrap">↺ Reset</button>
+  </div>
+</header>
+
+<!-- ======= MEMBER VIEW ======= -->
+<main id="viewMembers" class="view active">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <span class="eyebrow">Your savings journey</span>
+        <h1>18 short capsules.<br>One <em>confident</em> retirement.</h1>
+        <p class="lede">Everything in your MultiCare retirement and benefits program, explained in plain language — under 10 minutes at a time, on any device, whenever it suits you.</p>
+        <div class="hero-ctas">
+          <button class="btn btn-primary" onclick="openCapsule(0)">Start with capsule 1</button>
+          <a class="btn btn-ghost" href="#rewards">See your total rewards</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><span class="dot"></span><b>18</b> capsules</div>
+          <div class="hero-stat"><span class="dot"></span><b>4</b> topic areas</div>
+          <div class="hero-stat"><span class="dot"></span><b>Any device</b>, low bandwidth</div>
+        </div>
+      </div>
+      <aside class="hero-card" aria-label="Journey preview">
+        <h3>Where the journey leads</h3>
+        <ol class="mini-journey">
+          <li><span class="node">1</span><div><b>Understand your plan</b>What you have and how it works</div></li>
+          <li><span class="node">4</span><div><b>Grow your savings</b>Contributions, matching and investing</div></li>
+          <li><span class="node">★</span><div><b>Total rewards milestone</b>See everything your employer provides</div></li>
+          <li><span class="node">10</span><div><b>Retire ready</b>Turning savings into income</div></li>
+        </ol>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Capsule journey -->
+  <section class="section" id="capsules">
+    <div class="section-head">
+      <span class="eyebrow">Education capsules</span>
+      <h2>Follow the path, or jump to what matters today</h2>
+      <p>Each capsule is a short, expert-led video — under 10 minutes. Browse by category or watch in order. Your progress is tracked either way.</p>
+    </div>
+    <div class="cat-tabs" role="tablist" aria-label="Capsule categories">
+      <button class="cat-tab active" onclick="filterCat('all',this)" role="tab" aria-selected="true">All capsules</button>
+      <button class="cat-tab" onclick="filterCat('core',this)" role="tab" aria-selected="false">🏛 Core</button>
+      <button class="cat-tab" onclick="filterCat('invest',this)" role="tab" aria-selected="false">📈 Investments</button>
+      <button class="cat-tab" onclick="filterCat('life',this)" role="tab" aria-selected="false">🌱 Life events</button>
+      <button class="cat-tab" onclick="filterCat('sponsor',this)" role="tab" aria-selected="false">🏢 Plan sponsors</button>
+    </div>
+    <div class="cat-desc" id="catDesc"></div>
+    <div class="journey" id="journeyList">
+      <div class="path-fill" id="pathFill"></div>
+    </div>
+  </section>
+
+  <!-- Total rewards -->
+  <section class="section" id="rewards" style="padding-top:0">
+    <div class="rewards">
+      <div>
+        <span class="eyebrow" style="color:var(--gold)">Total rewards</span>
+        <h2>Your pay is bigger than your paycheque</h2>
+        <p>Your MultiCare compensation includes retirement contributions, group benefits, and wellness support that add up to more than most members realize. See your complete picture in one place.</p>
+        <button class="btn btn-gold" onclick="openCapsule(7)">Open the total rewards capsule</button>
+      </div>
+      <ul class="rewards-list">
+        <li>Base salary <b>Your paycheque</b></li>
+        <li>Employer retirement match <b>+ up to 5%</b></li>
+        <li>Health &amp; dental benefits <b>Included</b></li>
+        <li>Wellness &amp; EAP support <b>Included</b></li>
+        <li>Education &amp; savings tools <b>This site</b></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<!-- ======= SPONSOR VIEW ======= -->
+<main id="viewSponsors" class="view">
+  <section class="hero" style="padding-bottom:64px">
+    <div class="hero-inner" style="grid-template-columns:1fr">
+      <div>
+        <span class="eyebrow">For plan sponsors</span>
+        <h1 style="max-width:18ch">Education that proves its <em>value</em></h1>
+        <p class="lede">Give your members a guided savings journey — and get the engagement evidence to show it's working. Promote total rewards, lift participation, and support financial wellness across your workforce.</p>
+        <div class="hero-ctas">
+          <button class="btn btn-primary" onclick="setView('members')">See what your members experience</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="eyebrow">For plan sponsors</span>
+      <h2>What you get as a plan sponsor</h2>
+      <p>Designed around what your members need and what you need to demonstrate value: visibility into engagement, total-rewards storytelling, and content your workforce will actually finish.</p>
+    </div>
+    <div class="sponsor-grid">
+      <div class="panel">
+        <h3>Engagement dashboard</h3>
+        <p>Capsule-by-capsule completion across your plan — see what holds attention and where members drop off.</p>
+        <div class="bars">
+          <div class="bar-row"><span class="label">1 · Plan basics</span><div class="bar-track"><div class="bar-fill" style="width:86%"></div></div><span class="val">86%</span></div>
+          <div class="bar-row"><span class="label">2 · Start early</span><div class="bar-track"><div class="bar-fill" style="width:78%"></div></div><span class="val">78%</span></div>
+          <div class="bar-row"><span class="label">5 · Employer match</span><div class="bar-track"><div class="bar-fill" style="width:74%"></div></div><span class="val">74%</span></div>
+          <div class="bar-row"><span class="label">8 · Total rewards</span><div class="bar-track"><div class="bar-fill" style="width:69%"></div></div><span class="val">69%</span></div>
+          <div class="bar-row"><span class="label">10 · Retire ready</span><div class="bar-track"><div class="bar-fill" style="width:52%"></div></div><span class="val">52%</span></div>
+        </div>
+      </div>
+      <div class="panel gold">
+        <h3>Total rewards promotion</h3>
+        <p>Turn your benefits spend into a visible part of compensation.</p>
+        <ul>
+          <li>A dedicated total-rewards capsule branded for your organization</li>
+          <li>Side-by-side view of salary, match, benefits and wellness value</li>
+          <li>Ready-to-send launch emails and intranet copy</li>
+          <li>Talking points for managers and HR business partners</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>Member-driven content</h3>
+        <p>Topics chosen from what members ask for most.</p>
+        <ul>
+          <li>The savings journey: from first contribution to retirement income</li>
+          <li>Everyday money: budgeting, debt and emergency funds</li>
+          <li>Group benefits literacy — claims, coverage and wellness (GB)</li>
+          <li>Life-stage moments: new hires, mid-career, pre-retirees</li>
+        </ul>
+      </div>
+      <div class="panel gold">
+        <h3>Easy to run, easy to access</h3>
+        <p>Designed for busy HR teams and any-device access.</p>
+        <ul>
+          <li>One shareable link — no logins, apps or downloads required</li>
+          <li>Light pages that load fast on any workplace or mobile network</li>
+          <li>Content updates centrally — your link never changes</li>
+          <li>Accessible on any device, any time, including outside work hours</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ======= MODAL ======= -->
+<div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()" aria-label="Close capsule">✕</button>
+    <div class="modal-video" id="modalVideoArea">
+      <button class="play-btn" aria-label="Play capsule video" id="modalPlayBtn"></button>
+      <span class="vid-note" id="modalVidNote">Select a capsule from the list to begin</span>
+    </div>
+    <div class="modal-body">
+      <div class="capsule-top">
+        <span class="badge time" id="modalTime"></span>
+        <span class="badge gb" id="modalGB" style="display:none">Group benefits</span>
+      </div>
+      <h3 id="modalTitle"></h3>
+      <p id="modalDesc"></p>
+      <div class="chips" id="modalChips"></div>
+
+      <!-- Key takeaways summary -->
+      <div class="capsule-summary" id="modalSummary">
+        <h5>Key takeaways</h5>
+        <ul id="modalSummaryList"></ul>
+      </div>
+
+      <!-- Quiz section -->
+      <div class="quiz-section" id="quizSection" style="display:none">
+        <div class="quiz-header">
+          <h4>Quick check-in</h4>
+          <span class="quiz-progress" id="quizProgress">Question 1 of 2</span>
+        </div>
+        <div id="quizQuestionWrap">
+          <p class="quiz-question" id="quizQuestion"></p>
+          <div class="quiz-options" id="quizOptions"></div>
+          <div class="quiz-feedback" id="quizFeedback"></div>
+          <button class="quiz-next" id="quizNext" onclick="nextQuestion()">Next question →</button>
+        </div>
+        <div class="quiz-complete" id="quizComplete">
+          <div class="complete-icon">🎉</div>
+          <h4>Excellent work!</h4>
+          <p>You've answered both questions correctly. This capsule is now marked as complete — great progress on your savings journey!</p>
+          <button class="btn-gold" onclick="closeModal()">Continue your journey →</button>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-complete" id="btnComplete" onclick="toggleComplete()" style="display:none">Mark as complete</button>
+        <div class="modal-nav">
+          <button class="btn btn-nav" id="btnPrev" onclick="navCapsule(-1)">← Previous</button>
+          <button class="btn btn-nav" id="btnNext" onclick="navCapsule(1)">Next →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======= SPONSOR PASSWORD MODAL ======= -->
+<div id="sponsorAuthOverlay" style="display:none;position:fixed;inset:0;z-index:300;background:rgba(13,43,69,0.94);align-items:center;justify-content:center;padding:24px">
+  <div style="background:#fff;border-radius:18px;max-width:420px;width:100%;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.35)">
+    <div style="background:linear-gradient(135deg,var(--navy),#1a4a6e);padding:24px 28px 20px;border-bottom:3px solid var(--teal)">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+        <div style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.15);display:grid;place-items:center">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="3" y="8" width="12" height="9" rx="2" stroke="white" stroke-width="1.5"/><path d="M6 8V5.5a3 3 0 016 0V8" stroke="white" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="12.5" r="1.5" fill="white"/></svg>
+        </div>
+        <div>
+          <div style="color:#fff;font-weight:600;font-size:15px">Plan sponsor access</div>
+          <div style="color:rgba(255,255,255,0.55);font-size:12px">Restricted area</div>
+        </div>
+      </div>
+      <p style="color:#C7D6E2;font-size:13.5px;line-height:1.6;margin:0">This section is for plan sponsors only. Please enter your sponsor access code to continue.</p>
+    </div>
+    <div style="padding:22px 28px">
+      <label for="sponsorPwInput" style="display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:8px">Sponsor access code</label>
+      <input id="sponsorPwInput" type="password" placeholder="Enter access code"
+        autocomplete="off"
+        style="width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;font-size:15px;font-family:inherit;color:var(--ink);outline:none;margin-bottom:8px;letter-spacing:0.1em"
+        onkeydown="if(event.key==='Enter')checkSponsorPassword()"
+        onfocus="this.style.borderColor='var(--teal)'"
+        onblur="this.style.borderColor='var(--line)'">
+      <div id="sponsorPwError" style="display:none;font-size:12.5px;color:#C62828;margin-bottom:10px;padding:8px 12px;background:#FFEBEE;border-radius:7px">
+        ❌ Incorrect access code. Please try again or contact your MultiCare advisor.
+      </div>
+      <button onclick="checkSponsorPassword()"
+        style="width:100%;background:var(--teal);color:#fff;border:none;border-radius:10px;padding:13px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;margin-bottom:10px"
+        onmouseover="this.style.background='var(--teal-dark)'"
+        onmouseout="this.style.background='var(--teal)'">Access sponsor view →</button>
+      <button onclick="closeSponsorAuth()"
+        style="width:100%;background:none;color:var(--ink-soft);border:1.5px solid var(--line);border-radius:10px;padding:11px;font-size:13px;cursor:pointer;font-family:inherit">
+        Cancel — return to member view</button>
+      <p style="text-align:center;font-size:11.5px;color:var(--ink-soft);margin-top:14px;line-height:1.5">Don't have an access code?<br>Contact <a href="mailto:advice@multicaregrs.com" style="color:var(--teal)">advice@multicaregrs.com</a> or call 1-888-357-1179</p>
+    </div>
+  </div>
+</div>
+
+<!-- ======= WELCOME OVERLAY ======= -->
+<div id="welcomeOverlay" style="display:none;position:fixed;inset:0;z-index:200;background:rgba(13,43,69,0.92);display:flex;align-items:center;justify-content:center;padding:24px">
+  <div style="background:#fff;border-radius:18px;max-width:480px;width:100%;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.3)">
+    <div style="background:linear-gradient(135deg,var(--navy),#1a4a6e);padding:28px 28px 24px;border-bottom:3px solid var(--teal)">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+        <div style="width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--teal) 0% 55%,var(--gold) 55% 100%);display:grid;place-items:center;font-family:'Fraunces',serif;font-weight:700;font-size:20px;color:#fff">M</div>
+        <div style="color:#fff;font-weight:600;font-size:15px">MultiCare Learning<br><span style="font-size:12px;opacity:.65;font-weight:400">Group Retirement &amp; Benefits</span></div>
+      </div>
+      <h2 style="color:#fff;font-family:'Fraunces',serif;font-size:26px;font-weight:600;line-height:1.2;margin-bottom:8px">Welcome to your<br>savings journey</h2>
+      <p style="color:#C7D6E2;font-size:14px;line-height:1.6">18 short video capsules to help you understand your retirement plan, make confident investment decisions, and get the most from your total compensation.</p>
+    </div>
+    <div style="padding:24px 28px">
+      <label for="memberName" style="display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:8px">Your first name <span style="color:var(--ink-soft);font-weight:400">(so we can personalise your experience)</span></label>
+      <input id="memberName" type="text" placeholder="e.g. Sarah" autocomplete="given-name"
+        style="width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;font-size:15px;font-family:inherit;color:var(--ink);outline:none;margin-bottom:16px"
+        onkeydown="if(event.key==='Enter')startJourney()"
+        onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='var(--line)'">
+      <button onclick="startJourney()" style="width:100%;background:var(--teal);color:#fff;border:none;border-radius:10px;padding:14px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .15s" onmouseover="this.style.background='var(--teal-dark)'" onmouseout="this.style.background='var(--teal)'">Start my journey →</button>
+      <p style="text-align:center;font-size:12px;color:var(--ink-soft);margin-top:14px;line-height:1.5">Your progress is saved privately on this device.<br>No account needed. Your data stays yours.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ======= FOOTER ======= -->
+<footer>
+  <div class="footer-inner">
+    <div class="logo"><div class="logo-mark">M</div><div><b>MultiCare Learning</b><br>Group Retirement &amp; Benefits</div></div>
+    <div><b>Questions about your plan?</b><br>Reach out to your MultiCare advisor — we're here to help.</div>
+    <div><b>Accessibility</b><br>Works on any device. Captions available on all capsule videos.</div>
+  </div>
+</footer>
+
+<script>
+const capsules=[
+  // ── CORE ──
+  {t:"Understanding Your Retirement Savings Plans",d:"The ABCs of Accumulation and Decumulation — what your group plan includes, how money goes in, and how it becomes retirement income when you need it.",time:"8 min",chips:["Plan basics","How it works","First login"],cat:"core",gb:false,video:"https://www.loom.com/embed/e96d4c9238b54d9c960deb9010442829",summary:["The STEPS tool on the Manulife member website helps you calculate how much you need to save for retirement, model different scenarios, and track your progress — the exercise takes about 10–15 minutes and can be revisited any time.","Most Canadians need approximately 70% of their pre-retirement income in retirement, factoring in government benefits like CPP/QPP and OAS alongside your group plan savings.","You can personalize your retirement projection by adjusting your retirement age, including or excluding government benefits, and adding outside savings such as RRSPs, non-registered investments, or other assets.","Always click Save & Exit when finishing the STEPS exercise to preserve your data — and revisit the tool whenever your income, savings, or retirement plans change."]},
+  {t:"ABCs of RRSP, RPP, LIRA and TFSA — your savings alphabet",d:"What each account type is, how they're taxed, when money can move between them, and which one to prioritize at different stages of your career.",time:"8 min",chips:["RRSP","RPP","LIRA","TFSA"],cat:"core",gb:false},
+  {t:"Why you need to save NOW — the cost of waiting",d:"Real numbers showing what starting at 25 vs 35 vs 45 actually costs over a career. Compound growth explained in plain language — and the one change that makes the biggest difference.",time:"7 min",chips:["Compound growth","Start early","Real examples"],cat:"core",gb:false},
+  {t:"Employer matching — the free money you might be missing",d:"How the MultiCare match works, what the vesting schedule means, and how to make sure you're capturing every dollar. One of the most important actions any member can take.",time:"8 min",chips:["Employer match","Vesting","Free money"],cat:"core",gb:false},
+  {t:"Naming your beneficiary — why it matters more than you think",d:"What happens to your plan if you haven't named a beneficiary, how to update it after a life change, and the common mistakes that create problems for families.",time:"7 min",chips:["Beneficiary","Estate planning","How to update"],cat:"core",gb:false},
+  {t:"Using the STEPS tool — are you on track?",d:"A MultiCare-guided walkthrough of the Manulife STEPS retirement calculator. Set your income goal, run different retirement age scenarios, and save your results.",time:"9 min",chips:["STEPS tool","Retirement goal","Scenarios"],cat:"core",gb:false},
+  // ── INVESTMENTS ──
+  {t:"Understanding your investment options — funds without the jargon",d:"Conservative vs balanced vs growth. What a target-date fund does automatically. How to read a fund fact sheet in under 2 minutes and why fees matter over a 30-year career.",time:"9 min",chips:["Fund options","Target-date","MER & fees"],cat:"invest",gb:false},
+  {t:"What's my risk tolerance? Finding the right investment mix",d:"Walk through the Manulife investor profile questionnaire. What conservative, moderate and aggressive actually means for your balance over time, and how your age affects the right mix.",time:"8 min",chips:["Risk profile","Asset mix","Investor questionnaire"],cat:"invest",gb:false},
+  {t:"Market volatility — why you shouldn't panic when markets drop",d:"Historical data showing why long-term investors who stay invested outperform those who try to time the market. What dollar-cost averaging does for you automatically.",time:"8 min",chips:["Market drops","Stay invested","Long-term thinking"],cat:"invest",gb:false},
+  {t:"CPP strategy — when should I start taking it?",d:"You can take CPP as early as 60 or as late as 70. The difference in lifetime income can be significant. A plain-language walkthrough of the math and how to decide what's right for you.",time:"9 min",chips:["CPP timing","Early vs late","OAS strategy"],cat:"invest",gb:false},
+  {t:"Your income options at retirement — RRIF, annuity or lump sum?",d:"What do you actually do with your plan balance when you retire? The three main options explained side by side, with the key questions to ask before you decide.",time:"10 min",chips:["Decumulation","RRIF","Annuity"],cat:"invest",gb:false,milestone:true},
+  // ── LIFE EVENTS ──
+  {t:"New to the plan? Your first 5 steps",d:"A fast-paced checklist for new employees. Log in to Manulife, set your contribution rate, name your beneficiary, choose your funds, and run STEPS — all in under an hour.",time:"7 min",chips:["New member","Onboarding","Quick wins"],cat:"life",gb:false},
+  {t:"Getting married or starting a family — updating your plan",d:"How a major life event affects your beneficiary, contribution strategy, and insurance coverage. What to update, when to update it, and what happens if you don't.",time:"8 min",chips:["Life change","Beneficiary update","Family planning"],cat:"life",gb:true},
+  {t:"Changing jobs — what happens to your pension?",d:"What a LIRA is and when your money goes into one. Portability rules, vesting timelines, and the decisions you need to make when you leave an employer.",time:"8 min",chips:["LIRA","Job change","Portability"],cat:"life",gb:false},
+  {t:"Five years from retirement — your pre-retirement checklist",d:"What decisions to make in the final stretch: when to take CPP, how to de-risk your portfolio, decumulation options, and how to estimate your actual monthly retirement income.",time:"10 min",chips:["Pre-retirement","De-risking","Income estimate"],cat:"life",gb:false},
+  // ── PLAN SPONSORS ──
+  {t:"Your total compensation — it's more than your salary",d:"Breaks down the full value of being a plan member: employer pension match, group life insurance, disability coverage, health and dental. Puts a real dollar figure on the total package.",time:"8 min",chips:["Total rewards","Compensation value","Benefits"],cat:"sponsor",gb:false,milestone:true},
+  {t:"Group benefits 101 — health, dental and what's covered",d:"How to use your group benefits, what the plan covers, how to submit a claim, and the connection between benefits coverage and long-term financial wellness.",time:"9 min",chips:["Health & dental","Claims","Coverage"],cat:"sponsor",gb:true},
+  {t:"Financial wellness at work — budgeting, debt and everyday money",d:"Emergency funds, managing debt alongside saving, and the wellness resources available through your plan. Because retirement saving works best when your day-to-day finances are stable.",time:"9 min",chips:["Budgeting","Debt management","EAP & wellness"],cat:"sponsor",gb:true}
+];
+
+// ── Per-member localStorage progress ──
+const STORAGE_KEY='multicare_progress_v1';
+const NAME_KEY='multicare_member_name';
+
+function loadProgress(){
+  try{
+    const raw=localStorage.getItem(STORAGE_KEY);
+    if(raw){
+      const saved=JSON.parse(raw);
+      // Extend or trim to match current capsule count
+      const arr=new Array(capsules.length).fill(false);
+      saved.forEach((v,i)=>{if(i<arr.length)arr[i]=!!v;});
+      return arr;
+    }
+  }catch(e){}
+  return new Array(capsules.length).fill(false);
+}
+
+function saveProgress(){
+  try{localStorage.setItem(STORAGE_KEY,JSON.stringify(done));}catch(e){}
+}
+
+function getMemberName(){
+  try{return localStorage.getItem(NAME_KEY)||'';}catch(e){return '';}
+}
+
+function saveMemberName(name){
+  try{localStorage.setItem(NAME_KEY,name);}catch(e){}
+}
+
+function resetProgress(){
+  if(!confirm('Reset all your progress? This cannot be undone.'))return;
+  try{localStorage.removeItem(STORAGE_KEY);localStorage.removeItem(NAME_KEY);}catch(e){}
+  location.reload();
+}
+
+let done=loadProgress();
+let current=0;
+let quizCurrent=0;
+let quizAnswered=false;
+
+// ---- Quiz data (keyed by capsule index) ----
+const quizData={
+  0:[
+    {
+      q:"What is the main goal of the accumulation phase of your retirement savings plan?",
+      options:[
+        "To withdraw funds as needed",
+        "To grow your savings over time through contributions and investment returns",
+        "To convert savings into monthly income",
+        "To reduce your tax owing each year"
+      ],
+      correct:1,
+      encouragement:"Great effort! Think about what 'accumulation' means — it's all about building up your savings over time before retirement. Give it another try!"
+    },
+    {
+      q:"Which of the following is the best way to strengthen your accumulation phase?",
+      options:[
+        "Waiting until later in your career to start contributing",
+        "Contributing consistently and taking full advantage of your employer match",
+        "Keeping all savings in a personal bank account",
+        "Only contributing when markets are performing well"
+      ],
+      correct:1,
+      encouragement:"You're on the right track! Remember — time and consistency are your biggest advantages. Your employer match is essentially free money added to your savings. Have another go!"
+    }
+  ]
+};
+
+function loadQuiz(capsuleIndex){
+  const questions=quizData[capsuleIndex];
+  if(!questions||done[capsuleIndex]){
+    document.getElementById('quizSection').style.display='none';
+    return;
+  }
+  quizCurrent=0;
+  quizAnswered=false;
+  document.getElementById('quizSection').style.display='block';
+  document.getElementById('quizComplete').classList.remove('show');
+  document.getElementById('quizQuestionWrap').style.display='block';
+  renderQuestion(capsuleIndex);
+}
+
+function renderQuestion(capsuleIndex){
+  const questions=quizData[capsuleIndex];
+  const q=questions[quizCurrent];
+  document.getElementById('quizProgress').textContent=`Question ${quizCurrent+1} of ${questions.length}`;
+  document.getElementById('quizQuestion').textContent=q.q;
+  document.getElementById('quizFeedback').className='quiz-feedback';
+  document.getElementById('quizFeedback').textContent='';
+  document.getElementById('quizNext').className='quiz-next';
+  quizAnswered=false;
+  const optWrap=document.getElementById('quizOptions');
+  optWrap.innerHTML='';
+  q.options.forEach((opt,i)=>{
+    const btn=document.createElement('button');
+    btn.className='quiz-option';
+    btn.innerHTML=`<span class="opt-icon">${String.fromCharCode(65+i)}</span>${opt}`;
+    btn.onclick=()=>selectAnswer(capsuleIndex,i,btn);
+    optWrap.appendChild(btn);
+  });
+}
+
+function selectAnswer(capsuleIndex,selected,btn){
+  if(quizAnswered)return;
+  quizAnswered=true;
+  const questions=quizData[capsuleIndex];
+  const q=questions[quizCurrent];
+  const opts=document.querySelectorAll('.quiz-option');
+  const feedback=document.getElementById('quizFeedback');
+  opts.forEach(b=>b.disabled=true);
+  if(selected===q.correct){
+    btn.classList.add('correct');
+    btn.querySelector('.opt-icon').textContent='✓';
+    feedback.textContent='✅ Exactly right — well done! You clearly have a solid grasp of this concept.';
+    feedback.className='quiz-feedback correct show';
+    const isLast=(quizCurrent===questions.length-1);
+    if(isLast){
+      // All done — auto complete after short delay
+      setTimeout(()=>completeQuiz(capsuleIndex),1200);
+    } else {
+      const nextBtn=document.getElementById('quizNext');
+      nextBtn.className='quiz-next show';
+      nextBtn.textContent='Next question →';
+    }
+  } else {
+    btn.classList.add('wrong');
+    btn.querySelector('.opt-icon').textContent='✗';
+    feedback.textContent=`💡 ${q.encouragement}`;
+    feedback.className='quiz-feedback wrong show';
+    // Re-enable after a moment so they can try again
+    setTimeout(()=>{
+      opts.forEach(b=>{
+        b.disabled=false;
+        b.classList.remove('wrong','correct');
+        b.querySelector('.opt-icon').textContent=String.fromCharCode(65+Array.from(opts).indexOf(b));
+      });
+      quizAnswered=false;
+    },2200);
+  }
+}
+
+function nextQuestion(){
+  quizCurrent++;
+  renderQuestion(current);
+}
+
+function completeQuiz(capsuleIndex){
+  done[capsuleIndex]=true;
+  saveProgress();
+  document.getElementById('quizQuestionWrap').style.display='none';
+  document.getElementById('quizComplete').classList.add('show');
+  syncCompleteBtn();
+  renderJourney();
+}
+
+
+const catDescriptions={
+  all:"All 18 capsules across every topic area — watch in order or jump to what matters most right now.",
+  core:"The six essential capsules every plan member should complete. Start here to build a solid foundation.",
+  invest:"Five capsules covering investment funds, risk tolerance, market volatility, CPP strategy, and income options at retirement.",
+  life:"Four capsules tied to real life moments — starting a new job, growing your family, changing employers, and approaching retirement.",
+  sponsor:"Three capsules focused on total compensation, group benefits, and financial wellness — content that shows members the full value of their plan."
+};
+
+let currentFilter='all';
+
+function filterCat(cat,btn){
+  currentFilter=cat;
+  document.querySelectorAll('.cat-tab').forEach(t=>{t.classList.remove('active');t.setAttribute('aria-selected','false');});
+  btn.classList.add('active');btn.setAttribute('aria-selected','true');
+  const desc=document.getElementById('catDesc');
+  if(cat==='all'){desc.classList.remove('show');}
+  else{desc.textContent=catDescriptions[cat];desc.classList.add('show');}
+  renderJourney();
+}
+
+function renderJourney(){
+  const wrap=document.getElementById('journeyList');
+  wrap.querySelectorAll('.capsule').forEach(e=>e.remove());
+  const filtered=capsules.map((c,i)=>({c,i})).filter(({c})=>currentFilter==='all'||c.cat===currentFilter);
+  filtered.forEach(({c,i})=>{
+    const el=document.createElement('div');
+    el.className='capsule'+(done[i]?' done':'')+(c.milestone?' milestone':'');
+    const catLabel={core:'Core',invest:'Investments',life:'Life events',sponsor:'Plan sponsors'};
+    el.innerHTML=`
+      <div class="node">${c.milestone?'★':i+1}</div>
+      <button class="capsule-card" onclick="openCapsule(${i})" aria-label="Open capsule ${i+1}: ${c.t}">
+        <div class="capsule-top">
+          <h3>${c.t}</h3>
+          <span class="badge time">${c.time}</span>
+          <span class="badge cat-badge cat-${c.cat}">${catLabel[c.cat]}</span>
+          ${c.gb?'<span class="badge gb">Group benefits</span>':''}
+          <span class="badge done-badge">✓ Completed</span>
+        </div>
+        <p>${c.d}</p>
+        <div class="chips">${c.chips.map(x=>`<span class="chip">${x}</span>`).join('')}</div>
+      </button>`;
+    wrap.appendChild(el);
+  });
+  updateMeter();
+}
+function updateMeter(){
+  const n=done.filter(Boolean).length;
+  const total=capsules.length;
+  document.getElementById('meterText').textContent=`${n} / ${total}`;
+  document.getElementById('meterFill').style.width=(n/total*100)+'%';
+  const lastDone=done.lastIndexOf(true);
+  const pct=lastDone<0?0:((lastDone+1)/total*100);
+  document.getElementById('pathFill').style.height=pct+'%';
+}
+function openCapsule(i){
+  current=i;const c=capsules[i];
+  document.getElementById('modalTitle').textContent=`${i+1}. ${c.t}`;
+  document.getElementById('modalDesc').textContent=c.d;
+  document.getElementById('modalTime').textContent=c.time+' · video capsule';
+  document.getElementById('modalGB').style.display=c.gb?'inline-block':'none';
+  document.getElementById('modalChips').innerHTML=c.chips.map(x=>`<span class="chip">${x}</span>`).join('');
+  // Summary
+  const summaryWrap=document.getElementById('modalSummary');
+  const summaryList=document.getElementById('modalSummaryList');
+  if(c.summary&&c.summary.length){
+    summaryList.innerHTML=c.summary.map(s=>`<li>${s}</li>`).join('');
+    summaryWrap.style.display='block';
+  } else {
+    summaryWrap.style.display='none';
+  }
+  document.getElementById('btnPrev').disabled=(i===0);
+  document.getElementById('btnNext').disabled=(i===capsules.length-1);
+  // Render video area — Loom embed or placeholder
+  const videoArea=document.getElementById('modalVideoArea');
+  if(c.video){
+    videoArea.innerHTML=`<iframe src="${c.video}?hide_owner=true&hide_share=true&hide_title=false&hideEmbedTopBar=false" frameborder="0" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:18px 18px 0 0;" allow="autoplay; fullscreen"></iframe>`;
+    videoArea.style.position='relative';
+    videoArea.style.paddingBottom='56.25%';
+    videoArea.style.height='0';
+  } else {
+    videoArea.style.position='';
+    videoArea.style.paddingBottom='';
+    videoArea.style.height='';
+    videoArea.innerHTML=`<button class="play-btn" aria-label="Play capsule video" id="modalPlayBtn"></button><span class="vid-note" id="modalVidNote">Video coming soon</span>`;
+  }
+  syncCompleteBtn();
+  loadQuiz(i);
+  document.getElementById('modalBackdrop').classList.add('open');
+  document.body.style.overflow='hidden';
+  setView('members',true);
+}
+function syncCompleteBtn(){
+  const b=document.getElementById('btnComplete');
+  const hasQuiz=!!quizData[current];
+  if(hasQuiz && !done[current]){
+    b.style.display='none';
+  } else {
+    b.style.display='inline-flex';
+    if(done[current]){b.textContent='✓ Completed — mark as incomplete';b.classList.add('is-done');}
+    else{b.textContent='Mark as complete';b.classList.remove('is-done');}
+  }
+}
+function toggleComplete(){
+  done[current]=!done[current];
+  saveProgress();
+  syncCompleteBtn();renderJourney();
+}
+function navCapsule(dir){
+  const n=current+dir;
+  if(n>=0&&n<capsules.length)openCapsule(n);
+}
+function closeModal(){
+  document.getElementById('modalBackdrop').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.getElementById('modalBackdrop').addEventListener('click',e=>{
+  if(e.target.id==='modalBackdrop')closeModal();
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+function setView(v,silent){
+  const m=v==='members';
+  document.getElementById('viewMembers').classList.toggle('active',m);
+  document.getElementById('viewSponsors').classList.toggle('active',!m);
+  document.getElementById('btnMembers').setAttribute('aria-pressed',m);
+  document.getElementById('btnSponsors').setAttribute('aria-pressed',!m);
+  if(!silent)window.scrollTo({top:0});
+}
+function startJourney(){
+  const input=document.getElementById('memberName');
+  const name=(input.value||'').trim();
+  if(name) saveMemberName(name);
+  document.getElementById('welcomeOverlay').style.display='none';
+  document.getElementById('viewMembers').style.visibility='visible';
+  showGreeting(name||'');
+  renderJourney();
+}
+
+function showGreeting(name){
+  const g=document.getElementById('memberGreeting');
+  const r=document.getElementById('resetBtn');
+  if(name){
+    g.textContent='👋 Hi, '+name;
+    g.style.display='inline';
+  }
+  r.style.display='inline-block';
+}
+
+function initApp(){
+  const name=getMemberName();
+  if(!name){
+    document.getElementById('welcomeOverlay').style.display='flex';
+    // Hide main content until name entered
+    document.getElementById('viewMembers').style.visibility='hidden';
+  } else {
+    document.getElementById('welcomeOverlay').style.display='none';
+    document.getElementById('viewMembers').style.visibility='visible';
+    showGreeting(name);
+    renderJourney();
+  }
+}
+
+// ── Sponsor password gate ──
+// Password: MultiCare2025!  (stored as SHA-256 hash — never in plain text)
+const SPONSOR_HASH='20b14f90a5f6687cdf875786e91223084d49a42b608f031193efd873d4344e3e';
+const SPONSOR_SESSION_KEY='multicare_sponsor_auth';
+
+async function hashString(str){
+  const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+function requestSponsorAccess(){
+  // If already authenticated this session, go straight in
+  if(sessionStorage.getItem(SPONSOR_SESSION_KEY)==='1'){
+    setView('sponsors');
+    return;
+  }
+  // Show password modal
+  document.getElementById('sponsorPwInput').value='';
+  document.getElementById('sponsorPwError').style.display='none';
+  const overlay=document.getElementById('sponsorAuthOverlay');
+  overlay.style.display='flex';
+  setTimeout(()=>document.getElementById('sponsorPwInput').focus(),100);
+}
+
+async function checkSponsorPassword(){
+  const input=document.getElementById('sponsorPwInput').value;
+  const btn=document.querySelector('#sponsorAuthOverlay button');
+  btn.textContent='Checking…';
+  const hash=await hashString(input);
+  btn.textContent='Access sponsor view →';
+  if(hash===SPONSOR_HASH){
+    // Correct — store session auth and open view
+    sessionStorage.setItem(SPONSOR_SESSION_KEY,'1');
+    document.getElementById('sponsorAuthOverlay').style.display='none';
+    document.getElementById('sponsorPwError').style.display='none';
+    setView('sponsors');
+    // Update button to remove lock now that they're authenticated
+    document.getElementById('btnSponsors').textContent='Plan sponsors';
+  } else {
+    document.getElementById('sponsorPwError').style.display='block';
+    document.getElementById('sponsorPwInput').value='';
+    document.getElementById('sponsorPwInput').focus();
+  }
+}
+
+function closeSponsorAuth(){
+  document.getElementById('sponsorAuthOverlay').style.display='none';
+  document.getElementById('sponsorPwInput').value='';
+  document.getElementById('sponsorPwError').style.display='none';
+  // Make sure member view stays active
+  setView('members',true);
+}
+
+initApp();
+</script>
+</body>
+</html>
